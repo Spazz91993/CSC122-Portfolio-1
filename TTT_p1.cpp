@@ -5,8 +5,8 @@ Portfolio 1 TTT
 */
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
-
 char sQ[9];
 void tttboard()
 {
@@ -18,25 +18,26 @@ void tttboard()
 }
 int protectData(char player)
 {
-    int choice = 0;
-    cout << "\n\nPlayer " << player << ", enter a square #: " << endl;
-    cin >> choice;
-    while (choice < 1 || choice > 9 || cin.fail())
-    {
-        while (cin.fail())
-        {
-            cin.clear();
-            cin.ignore();
+    bool inputValid=false;
+    int choice;
+    string Choice;
+    while (!inputValid){
+        cout << "\n\nPlayer " << player << ", enter a square #: " << endl;
+        getline(cin,Choice);
+        if (Choice.length()!=1||!isdigit(Choice[0])){
+                cout << "\rTry a valid square 1-9." << endl;
+                tttboard();
         }
-        cout << "\rTry a valid square 1-9: ";
-        cin >> choice;
+        else {
+            choice = stoi(Choice);
+            inputValid = true;
+        }
     }
-
     return choice;
 }
 void turn(char player)
 {
-    int choice = 0;
+    int choice;
     choice = protectData(player);
     char tile = choice + 48;
     if (sQ[choice - 1] == tile) {
