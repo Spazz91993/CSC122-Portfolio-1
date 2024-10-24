@@ -6,6 +6,7 @@ Portfolio 1 TTT
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 using namespace std;
 char sQ[9];
 void tttboard()
@@ -25,6 +26,7 @@ int protectData(char player)
         cout << "\n\nPlayer " << player << ", enter a square #: " << endl;
         getline(cin,Choice);
         if (Choice.length()!=1||!isdigit(Choice[0])){
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
                 cout << "\rTry a valid square 1-9." << endl;
                 tttboard();
         }
