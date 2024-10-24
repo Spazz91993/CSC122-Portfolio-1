@@ -11,22 +11,22 @@ char sQ[9];
 void tttboard()
 {
     cout << "\t\t" << sQ[0] << "\t" << "|" << "\t" << sQ[1] << "\t" << "|" << "\t" << sQ[2] << endl;
-    cout << "\t-------------------------------------------------" << endl;
+    cout << "\t----------------+---------------+----------------" << endl;
     cout << "\t\t" << sQ[3] << "\t" << "|" << "\t" << sQ[4] << "\t" << "|" << "\t" << sQ[5] << endl;
-    cout << "\t-------------------------------------------------" << endl;
+    cout << "\t----------------+---------------+----------------" << endl;
     cout << "\t\t" << sQ[6] << "\t" << "|" << "\t" << sQ[7] << "\t" << "|" << "\t" << sQ[8] << endl;
 }
 int protectData(char player)
 {
-    bool inputValid=false;
+    bool inputValid = false;
     int choice;
     string Choice;
-    while (!inputValid){
+    while (!inputValid) {
         cout << "\n\nPlayer " << player << ", enter a square #: " << endl;
-        getline(cin,Choice);
-        if (Choice.length()!=1||!isdigit(Choice[0])){
-                cout << "\rTry a valid square 1-9." << endl;
-                tttboard();
+        getline(cin, Choice);
+        if (Choice.length() != 1 || !isdigit(Choice[0])) {
+            cout << "\rTry a valid square 1-9." << endl;
+            tttboard();
         }
         else {
             choice = stoi(Choice);
@@ -54,7 +54,7 @@ vector<int> checkWin()
     vector<vector<int>> winConditions = {
         {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
         {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
-        {0, 4, 8}, {2, 4, 6}            
+        {0, 4, 8}, {2, 4, 6}
     };
 
     for (auto& condition : winConditions) {
@@ -139,7 +139,7 @@ int main() {
         else {
             cout << "It's a draw!" << endl;
         }
-        cout << "\nWould you like to play again?\n\nPress Y to play again,or any other key to exit: " << endl;
+        cout << "\nWould you like to play again?\n\nPress Y to play again, or any other key to exit: " << endl;
         cin >> Reset;
     }
     return 0;
