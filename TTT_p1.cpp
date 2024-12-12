@@ -7,10 +7,16 @@ Portfolio 2 Battle TTT
 #include <vector>
 #include <string>
 #include <limits>
+#include<fstream>
+#include <cstdlib>
 using namespace std;
 
 char sQ[9];
 bool pyromancerUsed[2] = { false, false };
+int gameCount = 0;
+int pXWins = 0;
+int pOWins = 0;
+int drawCount = 0;
 
 void tttboard()
 {
@@ -197,12 +203,31 @@ void gameLoop(const string& gameMode) {
         if (!winningBoxes.empty() || (gameMode == "Battle" && checkSwarmWin(currentPlayer))) {
             tttboard();
             cout << "\nPlayer " << currentPlayer << " wins!\n";
+            if (currentPlayer == 'X') {
+                pXWins++;
+            }
+            else {
+                pOWins++;
+            }
             return;
         }
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
     tttboard();
     cout << "\nIt's a draw!\n";
+    drawCount++;
+}
+
+void createScoreSheet() {
+    ofstream scoreSheet;
+    scoreSheet.open("TTTwins.txt", ios::out);
+    if (!scoreSheet) {
+        cerr << "Error opening File";
+        exit(EXIT_FAILURE);
+    }
+    scoreSheet << "TIC-TAC-TOE SCORE SHEET\n\nGames played: " << gameCount << "\n\nPlayer X win count: " << pXWins << "\n\nPlayer O win count: " << pOWins << "\n\nDraw count: " << drawCount;
+    scoreSheet.close();
+    system("start TTTWins.txt");
 }
 
 int main() {
@@ -214,6 +239,7 @@ int main() {
         pyromancerUsed[0] = { false };
         pyromancerUsed[1] = { false };
         while (!inputValid) {
+            gameCount++;
             cout << "\nSelect Game Mode:\n";
             cout << "1. Regular Tic-Tac-Toe\n";
             cout << "2. Battle Tic-Tac-Toe\n";
@@ -243,5 +269,6 @@ int main() {
             break;
         }
     }
+    createScoreSheet();
     return 0;
 }
