@@ -225,7 +225,7 @@ void createScoreSheet() {
         cerr << "Error opening File";
         exit(EXIT_FAILURE);
     }
-    scoreSheet << "TIC-TAC-TOE SCORE SHEET\n\nGames played: " << gameCount << "\n\nPlayer X win count: " << pXWins << "\n\nPlayer O win count: " << pOWins << "\n\nDraw count: " << drawCount;
+    scoreSheet << "*** TIC-TAC-TOE SCORE SHEET ***\n\nGames played: " << gameCount << "\n\nPlayer X win count: " << pXWins << "\n\nPlayer O win count: " << pOWins << "\n\nDraw count: " << drawCount;
     scoreSheet.close();
     system("start TTTWins.txt");
 }
